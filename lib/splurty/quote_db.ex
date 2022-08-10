@@ -2,7 +2,8 @@ defmodule Splurty.QuoteDb do
   import Ecto.Query, warn: false
   alias Splurty.QuoteDb.Quote
   alias Splurty.Repo
-
+  # for ecto queries
+  #https://hexdocs.pm/ecto/Ecto.Query.html
   def list_quotes do
     #Repo.all(from q in "quotes", select: q.saying)
     Repo.all(Quote)
@@ -16,11 +17,15 @@ defmodule Splurty.QuoteDb do
 
   def get_quote!(id) do
      Repo.get!(Quote, id)
+     #Repo.all(from q in "quotes",where: q.id == ^id, select: {q.saying, q.author})
   end
 
   def update_quote(%Quote{} = quote, attrs) do
     quote
     |> Quote.changeset(attrs)
     |> Repo.update()
+  end
+  def delete_quote(%Quote{} = id) do
+    Repo.delete(id)
   end
 end
