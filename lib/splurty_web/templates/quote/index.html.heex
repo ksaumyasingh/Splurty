@@ -1,0 +1,19 @@
+<section>
+    <table>
+        <thead>
+            <tr>
+                <th>Author</th>
+                <th>Saying</th>
+            </tr>  
+        </thead>
+        <tbody>
+           
+            <%= for q <- @quotes do %>
+             <tr>
+                <td><%= q.saying %></td>
+                <td><%= q.author %></td>
+            </tr>
+            <% end %>
+        </tbody>    
+    </table>
+</section>

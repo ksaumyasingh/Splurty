@@ -18,6 +18,9 @@ defmodule SplurtyWeb.Router do
     pipe_through :browser
 
     get "/", QuoteController, :homeage
+    #resources "/quotes", QuoteController
+    get "/quotes" , QuoteController, :index
+    get "/quotes/new" , QuoteController, :new
   end
 
   # Other scopes may use custom stacks.
