@@ -8,7 +8,7 @@ defmodule Splurty.QuoteDb.Quote do
     timestamps()
   end
 
-  def changeset(quote, attrs) do
+  def changeset(quote, attrs \\ %{}) do
     quote
     |> cast(attrs, [:saying, :author])
     |> validate_required([:saying])
