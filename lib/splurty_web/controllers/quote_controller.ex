@@ -40,21 +40,27 @@ defmodule SplurtyWeb.QuoteController do
 
   def edit(conn , %{"id" => id}) do
     quote_by_id= QuoteDb.get_quote!(id)
-    changeset= QuoteDb.change_quote(%Quote{})
-    render(conn, "edit.html", quote_by_id: quote_by_id, changeset: changeset)
+    changeset= QuoteDb.change_quote(quote_by_id)
+    render(conn, "edit.html", quote: quote_by_id, changeset: changeset)
+  end
+
+  def update(conn ,%{"id" => id, "quote" => quote_params}) do
+    quote_by_id= QuoteDb.get_quote!(id)
+    case QuoteDb.update_quote(quote_by_id, quote_params) do
+      {:ok, _quote} ->
+        conn
+        |> put_flash(:info, "Quote updated successfully")
+        |> redirect(to: Routes.quote_path(conn, :show, quote_by_id))
+      {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "edit.html",quote: quote_by_id, changeset: changeset)
+    end
   end
 
   def delete(conn , %{"id" => id}) do
     quote_by_id= QuoteDb.get_quote!(id)
-    case QuoteDb.delete_quote(quote_by_id) do
-      {:ok, _quote} ->
-        conn
-        |> put_flash(:info, "Quote deleted successfully")
-        |> redirect(to: Routes.quote_path(conn, :index))
-      {:error, _} ->
-        conn
-        |> put_flash(:info, "Error")
-        |> redirect(to: Routes.quote_path(conn, :index))
-    end
+    {:ok, _quote} = QuoteDb.delete_quote(quote_by_id)
+    conn
+    |> put_flash(:info, "Quote deleted successfully")
+    |> redirect(to: Routes.quote_path(conn, :index))
   end
 end

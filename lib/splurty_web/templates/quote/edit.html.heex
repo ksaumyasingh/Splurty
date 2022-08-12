@@ -4,13 +4,13 @@
 <%= form_for @changeset, Routes.quote_path(@conn, :create), fn f -> %>
   <div>
     <%= label f, :saying %>
-    <%= textarea f, :saying, rows: 5 %>
+    <%= textarea f, :saying, rows: 5, value: @quote_by_id.saying %>
     <%= error_tag f, :saying %>
   </div>
 
   <div>
     <%= label f, :author %>
-    <%= text_input f, :author %>
+    <%= text_input f, :author,  value: @quote_by_id.author %>
     <%= error_tag f, :author %>
   </div>
 
