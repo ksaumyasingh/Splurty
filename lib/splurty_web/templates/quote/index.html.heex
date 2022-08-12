@@ -14,6 +14,13 @@
                     <%= link q.saying, to: Routes.quote_path(@conn, :show, q.id) %>
                 </td>
                 <td><%= q.author %></td>
+                <td>
+                   <%= link "Edit", to: Routes.quote_path(@conn, :edit, q.id) %>
+                </td>
+                <td>
+                    <%= link "Delete", to: Routes.quote_path(@conn, :delete, q.id), method: :delete, data: [confirm: "Are you sure?"] %>
+
+                </td>
             </tr>
             <% end %>
         </tbody>    

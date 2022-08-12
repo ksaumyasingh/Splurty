@@ -37,4 +37,24 @@ defmodule SplurtyWeb.QuoteController do
     quote_by_id= QuoteDb.get_quote!(id)
     render(conn, "show.html", quote_by_id: quote_by_id)
   end
+
+  def edit(conn , %{"id" => id}) do
+    quote_by_id= QuoteDb.get_quote!(id)
+    changeset= QuoteDb.change_quote(%Quote{})
+    render(conn, "edit.html", quote_by_id: quote_by_id, changeset: changeset)
+  end
+
+  def delete(conn , %{"id" => id}) do
+    quote_by_id= QuoteDb.get_quote!(id)
+    case QuoteDb.delete_quote(quote_by_id) do
+      {:ok, _quote} ->
+        conn
+        |> put_flash(:info, "Quote deleted successfully")
+        |> redirect(to: Routes.quote_path(conn, :index))
+      {:error, _} ->
+        conn
+        |> put_flash(:info, "Error")
+        |> redirect(to: Routes.quote_path(conn, :index))
+    end
+  end
 end

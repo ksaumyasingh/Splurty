@@ -1,0 +1,20 @@
+<h1>Edit Quote</h1>
+
+
+<%= form_for @changeset, Routes.quote_path(@conn, :create), fn f -> %>
+  <div>
+    <%= label f, :saying %>
+    <%= textarea f, :saying, rows: 5 %>
+    <%= error_tag f, :saying %>
+  </div>
+
+  <div>
+    <%= label f, :author %>
+    <%= text_input f, :author %>
+    <%= error_tag f, :author %>
+  </div>
+
+  <div>
+    <%= submit "Submit" %>
+  </div>
+<% end %> 
