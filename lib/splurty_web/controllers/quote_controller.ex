@@ -39,8 +39,8 @@ defmodule SplurtyWeb.QuoteController do
   end
 
   def edit(conn , %{"id" => id}) do
-    quote_by_id= QuoteDb.get_quote!(id)
-    changeset= QuoteDb.change_quote(quote_by_id)
+    quote_by_id = QuoteDb.get_quote!(id)
+    changeset = QuoteDb.change_quote(quote_by_id)
     render(conn, "edit.html", quote: quote_by_id, changeset: changeset)
   end
 
