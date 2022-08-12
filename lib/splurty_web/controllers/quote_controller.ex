@@ -32,4 +32,9 @@ defmodule SplurtyWeb.QuoteController do
         render(conn, "new.html", changeset: changeset)
     end
   end
+
+  def show(conn , %{"id" => id}) do
+    quote_by_id= QuoteDb.get_quote!(id)
+    render(conn, "show.html", quote_by_id: quote_by_id)
+  end
 end
