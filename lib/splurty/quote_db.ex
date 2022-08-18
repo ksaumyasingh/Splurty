@@ -34,4 +34,14 @@ defmodule Splurty.QuoteDb do
   def delete_quote(%Quote{} = id) do
     Repo.delete(id)
   end
+
+  def random_quote do
+    query =
+      from t in Quote,
+      where: is_nil(t.id),
+      order_by: fragment("RANDOM()"),
+      limit: 10
+    IO.puts(query)
+    Repo.one!(query)
+  end
 end
