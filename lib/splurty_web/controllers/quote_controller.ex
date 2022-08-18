@@ -2,7 +2,7 @@ defmodule SplurtyWeb.QuoteController do
   use SplurtyWeb, :controller
   alias Splurty.QuoteDb
   alias Splurty.QuoteDb.Quote
-  alias Splurty.Repo
+  #alias Splurty.Repo
 
 
   def homeage(conn, _params) do
