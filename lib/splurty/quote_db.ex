@@ -4,6 +4,14 @@ defmodule Splurty.QuoteDb do
   alias Splurty.Repo
   # for ecto queries
   #https://hexdocs.pm/ecto/Ecto.Query.html
+  def get_random do
+    query = Ecto.Adapters.SQL.query(Repo,
+      "SELECT id from quotes order by random() limit 1"
+    )
+    {:ok,%Postgrex.Result{rows: [[id]]}} = query
+    get_quote!(id)
+  end
+
   def list_quotes do
     #Repo.all(from q in "quotes", select: q.saying)
     Repo.all(Quote)
@@ -44,4 +52,5 @@ defmodule Splurty.QuoteDb do
     IO.puts(query)
     Repo.one!(query)
   end
+
 end

@@ -6,7 +6,8 @@ defmodule SplurtyWeb.QuoteController do
 
 
   def homeage(conn, _params) do
-    render(conn, "homepage.html")
+    quotes = QuoteDb.get_random()
+    render(conn, "homepage.html", quotes: quotes)
   end
 
   @spec index(Plug.Conn.t(), any) :: Plug.Conn.t()

@@ -1,1 +1,6 @@
+<section>
+<h1><b><%= @quotes.saying %></b></h1>
+<h3><i><%= @quotes.author %></i></h3>
+</section>
+
 <%= link "This isn't enough, I need more", to: Routes.quote_path(@conn, :index) %>
